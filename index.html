@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faculty of Computing LMS | University of Sri Jayewardenepura</title>
+  <meta name="description" content="Redesigned minimal, accessible, and intuitive Learning Management System for the Faculty of Computing, University of Sri Jayewardenepura.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="light" data-font-size="normal">
+  <!-- Accessibility Skip Link -->
+  <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+  <!-- Usability Highlights Banner (Clickable to inspect how the 8 problems were solved) -->
+  <aside class="usability-pill-banner" aria-label="Usability redesign showcase">
+    <div class="banner-inner">
+      <span class="badge-usability"><span class="pulse-dot"></span> HCI Redesign Active</span>
+      <p>Addressing all <strong>8 Usability Flaws</strong> of USJ Faculty of Computing LMS (Heuristic Evaluation & WCAG 2.1 AA).</p>
+      <button class="btn-banner-link" id="open-usability-inspector-btn" aria-label="Open usability evaluation matrix">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        Inspect 8 Usability Fixes
+      </button>
+    </div>
+  </aside>
+
+  <!-- Top Navigation Bar -->
+  <header class="app-header" role="banner">
+    <div class="header-container">
+      <div class="brand-group">
+        <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation drawer" aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+
+        <a href="#" class="brand-link" id="brand-home-link" aria-label="USJ Faculty of Computing LMS Homepage">
+          <div class="brand-crest" aria-hidden="true">
+            <span class="crest-text">FOC</span>
+          </div>
+          <div class="brand-text">
+            <span class="uni-name">University of Sri Jayewardenepura</span>
+            <span class="faculty-name">Faculty of Computing <strong>LMS</strong></span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Prominent Global Search Bar (Solves Problem #3) -->
+      <div class="header-search-container" role="search">
+        <div class="search-input-wrapper">
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input 
+            type="text" 
+            id="global-search-input" 
+            placeholder="Search enrolled courses, codes, lecture notes, or notices... (Ctrl + K)" 
+            aria-label="Search courses, lecture materials, and notices" 
+            autocomplete="off"
+          />
+          <kbd class="search-kbd" title="Shortcut">Ctrl K</kbd>
+          <button class="search-clear-btn" id="search-clear-btn" aria-label="Clear search input" style="display: none;">&times;</button>
+        </div>
+
+        <!-- Live Instant Suggestions Dropdown -->
+        <div class="search-suggestions-dropdown" id="search-suggestions-dropdown" style="display: none;" role="listbox">
+          <div class="suggestions-header">
+            <span>Quick Suggestions</span>
+            <span class="suggestion-hint">Press ESC to dismiss</span>
+          </div>
+          <div class="suggestions-list" id="suggestions-list"></div>
+        </div>
+      </div>
+
+      <!-- Right Utility Controls (Solves Problem #5 & #8) -->
+      <div class="header-actions">
+        <!-- Accessibility Controls Menu (Solves Problem #5) -->
+        <div class="accessibility-dropdown-wrapper">
+          <button class="icon-btn" id="a11y-btn" aria-label="Accessibility options" title="Accessibility controls" aria-haspopup="true" aria-expanded="false">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            <span class="a11y-badge">A11y</span>
+          </button>
+          <div class="a11y-menu" id="a11y-menu" style="display: none;">
+            <div class="a11y-menu-header">Accessibility Settings (WCAG 2.1)</div>
+            <div class="a11y-item">
+              <span>Theme Mode:</span>
+              <div class="theme-switch-group">
+                <button class="chip-btn active" data-set-theme="light">Light</button>
+                <button class="chip-btn" data-set-theme="dark">Dark</button>
+                <button class="chip-btn" data-set-theme="contrast" title="High Contrast for Visual Impairments">High Contrast</button>
+              </div>
+            </div>
+            <div class="a11y-item">
+              <span>Text Size:</span>
+              <div class="font-size-group">
+                <button class="chip-btn" data-font="small">A-</button>
+                <button class="chip-btn active" data-font="normal">A</button>
+                <button class="chip-btn" data-font="large">A+</button>
+              </div>
+            </div>
+            <div class="a11y-item">
+              <span>Focus Guides:</span>
+              <label class="toggle-switch">
+                <input type="checkbox" id="toggle-focus-guide" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Prominent Help & Support Link (Solves Problem #8) -->
+        <button class="help-nav-btn" id="header-help-btn" aria-label="Help and Student Support Center">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span class="help-btn-label">Help & Support</span>
+          <span class="help-indicator-dot" title="Live LMS Desk Available"></span>
+        </button>
+
+        <!-- Notification Bell -->
+        <div class="notif-wrapper">
+          <button class="icon-btn" id="notif-bell-btn" aria-label="Announcements notifications (3 unread)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <span class="badge-count">3</span>
+          </button>
+          <div class="notif-dropdown" id="notif-dropdown" style="display: none;">
+            <div class="notif-header">
+              <span>Urgent Notices (3)</span>
+              <button class="text-link-btn" id="mark-notifs-read">Mark all read</button>
+            </div>
+            <div class="notif-items" id="notif-items-list">
+              <!-- Rendered via JS -->
+            </div>
+            <a href="#" class="notif-footer" id="view-all-notifs-link">View all academic notices &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Student Profile Widget -->
+        <div class="user-profile-menu">
+          <button class="profile-chip-btn" id="profile-toggle-btn" aria-label="Student account Kasun Perera" aria-expanded="false">
+            <div class="avatar-ring">
+              <span class="avatar-initials">KP</span>
+            </div>
+            <div class="profile-info-text">
+              <span class="student-name">Kasun Perera</span>
+              <span class="student-reg">SC/2022/1042 • Year 3</span>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="profile-dropdown" id="profile-dropdown" style="display: none;">
+            <div class="profile-dd-header">
+              <strong>Kasun Perera</strong>
+              <small>kasun.p@fot.sjp.ac.lk</small>
+              <div class="dept-tag">Dept. of Software Engineering</div>
+            </div>
+            <ul class="dropdown-links">
+              <li><a href="#" id="menu-my-courses"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Enrolled Modules</a></li>
+              <li><a href="#" id="menu-my-grades"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> Semester Results & GPA</a></li>
+              <li><a href="#" id="menu-help"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg> LMS Support Desk</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Navigation Bar / Tabs (Solves Problem #1 & #2) -->
+  <nav class="main-tab-nav" aria-label="LMS primary sections">
+    <div class="nav-container">
+      <ul class="nav-tabs" role="tablist">
+        <li role="presentation">
+          <button class="tab-btn active" role="tab" id="tab-dashboard" aria-selected="true" aria-controls="view-dashboard" data-view="dashboard">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+            <span>Overview Dashboard</span>
+          </button>
+        </li>
+        <li role="presentation">
+          <button class="tab-btn" role="tab" id="tab-courses" aria-selected="false" aria-controls="view-courses" data-view="courses">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            <span>My Courses</span>
+            <span class="tab-pill">6</span>
+          </button>
+        </li>
+        <li role="presentation">
+          <button class="tab-btn" role="tab" id="tab-announcements" aria-selected="false" aria-controls="view-announcements" data-view="announcements">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+            <span>Notice Board</span>
+            <span class="tab-pill alert-pill">3 New</span>
+          </button>
+        </li>
+        <li role="presentation">
+          <button class="tab-btn" role="tab" id="tab-deadlines" aria-selected="false" aria-controls="view-deadlines" data-view="deadlines">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>Deadlines & Submissions</span>
+            <span class="tab-pill deadline-pill">2 Due</span>
+          </button>
+        </li>
+        <li role="presentation">
+          <button class="tab-btn" role="tab" id="tab-results" aria-selected="false" aria-controls="view-results" data-view="results">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            <span>Results & GPA</span>
+          </button>
+        </li>
+        <li role="presentation">
+          <button class="tab-btn" role="tab" id="tab-departments" aria-selected="false" aria-controls="view-departments" data-view="departments">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"/><path d="M9 7h1"/><path d="M9 11h1"/><path d="M9 15h1"/><path d="M14 7h1"/><path d="M14 11h1"/><path d="M14 15h1"/></svg>
+            <span>Course Catalog</span>
+          </button>
+        </li>
+        <li role="presentation" class="tab-inspector-highlight">
+          <button class="tab-btn inspector-tab-btn" role="tab" id="tab-usability" aria-selected="false" aria-controls="view-usability" data-view="usability">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            <span>8 Usability Fixes Audit</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Body Content Wrapper -->
+  <div class="app-layout">
+    <!-- Collapsible Quick Navigation Sidebar (Desktop + Mobile Drawer) -->
+    <aside class="sidebar-drawer" id="sidebar-drawer" aria-label="Academic workspace sidebar">
+      <div class="sidebar-inner">
+        <div class="sidebar-user-card">
+          <div class="user-meta">
+            <div class="avatar-lg">KP</div>
+            <div class="user-details">
+              <strong>Kasun Perera</strong>
+              <p>BSc (Hons) in Software Eng.</p>
+              <span class="active-badge"><span class="dot"></span> Enrolled 2023/2024</span>
+            </div>
+          </div>
+          <div class="semester-progress">
+            <div class="progress-labels">
+              <span>Semester 1 Progress</span>
+              <strong>Week 9 of 15</strong>
+            </div>
+            <div class="progress-track" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-fill" style="width: 60%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav-group" aria-label="Quick links">
+          <div class="sidebar-heading">Active Enrolled Courses</div>
+          <ul class="sidebar-course-list" id="sidebar-enrolled-courses">
+            <!-- Populated via JS -->
+          </ul>
+
+          <div class="sidebar-heading">Academic Departments</div>
+          <ul class="sidebar-dept-list">
+            <li><button class="dept-link-btn" data-dept="DSE"><span class="dept-bullet dse"></span> Software Engineering</button></li>
+            <li><button class="dept-link-btn" data-dept="DCS"><span class="dept-bullet dcs"></span> Computer Science</button></li>
+            <li><button class="dept-link-btn" data-dept="DIS"><span class="dept-bullet dis"></span> Information Systems</button></li>
+            <li><button class="dept-link-btn" data-dept="DDS"><span class="dept-bullet dds"></span> Data Science</button></li>
+          </ul>
+
+          <div class="sidebar-heading">Fast Services & Resources</div>
+          <ul class="sidebar-dept-list">
+            <li><button class="dept-link-btn" id="open-exam-timetable-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Exam Time Table</button></li>
+            <li><button class="dept-link-btn" id="open-gpa-calc-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> GPA Simulator</button></li>
+            <li><button class="dept-link-btn" id="open-feedback-form-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Course Feedback Survey</button></li>
+          </ul>
+        </nav>
+
+        <div class="sidebar-support-card">
+          <div class="support-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <strong>Need LMS Help?</strong>
+            <p>FOC CITS Helpdesk is open Mon–Fri 8am–4pm</p>
+            <button class="btn-text-action" id="sidebar-support-open">Contact Helpdesk &rarr;</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Workspace Container -->
+    <main class="main-workspace" id="main-content" tabindex="-1">
+
+      <!-- ================= VIEW 1: OVERVIEW DASHBOARD (Default) ================= -->
+      <section class="view-panel active" id="view-dashboard" aria-label="Dashboard overview">
+        <!-- Hero Personalized Greeting & Quick Stats -->
+        <div class="dashboard-hero-card">
+          <div class="hero-content">
+            <div class="hero-badge">Academic Year 2023/2024 • Semester 1</div>
+            <h1>Ayubowan, Kasun! 👋</h1>
+            <p class="hero-subtext">Here is your academic briefing for today, <strong>Monday, Week 9</strong>. You have 2 assignments pending and 1 lecture scheduled.</p>
+          </div>
+          <div class="hero-quick-stats">
+            <div class="stat-pill" tabindex="0">
+              <span class="stat-num" id="stat-enrolled-count">6</span>
+              <span class="stat-label">Enrolled Modules</span>
+            </div>
+            <div class="stat-pill highlight-deadline" tabindex="0">
+              <span class="stat-num" id="stat-pending-tasks">2</span>
+              <span class="stat-label">Due This Week</span>
+            </div>
+            <div class="stat-pill" tabindex="0">
+              <span class="stat-num">3.72</span>
+              <span class="stat-label">Cumulative GPA</span>
+            </div>
+            <div class="stat-pill highlight-alert" tabindex="0">
+              <span class="stat-num">3</span>
+              <span class="stat-label">Urgent Notices</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- High-Priority Critical Alert (Solves Problem #7: Separates urgent announcements from clutter) -->
+        <div class="critical-alert-card" role="region" aria-label="Urgent Academic Notice">
+          <div class="alert-icon-wrap" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div class="alert-content">
+            <div class="alert-tags">
+              <span class="tag-urgent">CRITICAL NOTICE</span>
+              <span class="tag-date">Issued: Yesterday at 4:30 PM by Dean's Office</span>
+            </div>
+            <h3>End-of-Semester 1 Examination Timetable & Admission Card Download</h3>
+            <p>Students eligible for Semester 1 examinations are advised to download the stamped admission form and verify hall allocation numbers before Friday.</p>
+          </div>
+          <div class="alert-actions">
+            <button class="btn-solid-primary" id="btn-download-admission">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download PDF (1.4 MB)
+            </button>
+            <button class="btn-outline" id="btn-view-all-notices-alert">View Notice Board</button>
+          </div>
+        </div>
+
+        <!-- 2-Column Dashboard Grid -->
+        <div class="dashboard-grid">
+          <!-- Left Main Column: Active Courses & Materials -->
+          <div class="grid-primary-col">
+            <!-- Section: In-Progress Enrolled Courses (Solves Problem #1 & #2: Direct 1-click access) -->
+            <div class="section-card">
+              <div class="section-header">
+                <div class="section-title-wrap">
+                  <span class="section-icon-dot"></span>
+                  <h2>My Enrolled Courses</h2>
+                  <span class="header-count-tag" id="course-count-display">6 Active Courses</span>
+                </div>
+                <div class="header-tools">
+                  <div class="filter-pills-row" role="group" aria-label="Course Department Filters">
+                    <button class="filter-chip active" data-filter="ALL">All</button>
+                    <button class="filter-chip" data-filter="DSE">Software Eng</button>
+                    <button class="filter-chip" data-filter="DCS">Computer Sci</button>
+                    <button class="filter-chip" data-filter="DIS">Info Systems</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Enrolled Courses Grid (Clean Card Design, No Lorem Ipsum, Solves Problem #4) -->
+              <div class="courses-card-grid" id="dashboard-courses-grid">
+                <!-- Injected via JavaScript -->
+              </div>
+            </div>
+
+            <!-- Section: Recent Course Materials & Handouts -->
+            <div class="section-card">
+              <div class="section-header">
+                <div class="section-title-wrap">
+                  <h2>Recently Uploaded Lecture Materials</h2>
+                  <p class="section-sub">Latest slides, tutorial sheets, and laboratory task guides</p>
+                </div>
+              </div>
+              <div class="materials-list" id="dashboard-materials-list">
+                <!-- Injected via JavaScript -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Secondary Column: Tasks, Submissions & Mini Notice Board -->
+          <div class="grid-secondary-col">
+            <!-- Section: Pending Assignments & Deadlines (Solves Problem #1: Clean separation) -->
+            <div class="section-card deadline-card">
+              <div class="section-header">
+                <div class="section-title-wrap">
+                  <h2>Submissions & Deadlines</h2>
+                </div>
+                <button class="btn-subtle-link" id="view-all-deadlines-btn">View All (4) &rarr;</button>
+              </div>
+
+              <div class="task-feed" id="dashboard-deadline-feed">
+                <!-- Injected via JavaScript -->
+              </div>
+            </div>
+
+            <!-- Section: Faculty Announcements Feed (Solves Problem #7) -->
+            <div class="section-card">
+              <div class="section-header">
+                <div class="section-title-wrap">
+                  <h2>Faculty Notices</h2>
+                </div>
+                <button class="btn-subtle-link" id="view-all-notices-btn">Notice Hub &rarr;</button>
+              </div>
+              <div class="mini-notices-feed" id="dashboard-mini-notices">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <!-- Quick Contacts Card (Solves Problem #8) -->
+            <div class="section-card quick-help-card">
+              <div class="quick-help-header">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <h3>Course Coordinators & Mentors</h3>
+              </div>
+              <p>Quick access to your academic year advisors and LMS administration team.</p>
+              <div class="mentor-contact-item">
+                <div class="mentor-avatar">Dr</div>
+                <div class="mentor-info">
+                  <strong>Dr. C. Wickramasinghe</strong>
+                  <span>Year 3 Academic Coordinator</span>
+                  <a href="mailto:coordinator.y3@foc.sjp.ac.lk" class="contact-link">coordinator.y3@foc.sjp.ac.lk</a>
+                </div>
+              </div>
+              <div class="mentor-contact-item">
+                <div class="mentor-avatar lms-av">IT</div>
+                <div class="mentor-info">
+                  <strong>FOC LMS Technical Desk</strong>
+                  <span>Server & Login Support</span>
+                  <a href="mailto:lmsadmin@foc.sjp.ac.lk" class="contact-link">lmsadmin@foc.sjp.ac.lk</a>
+                </div>
+              </div>
+              <button class="btn-full-width-secondary" id="btn-open-help-center">
+                Open Help & Support Center
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= VIEW 2: MY COURSES VIEW (Solves Problem #2) ================= -->
+      <section class="view-panel" id="view-courses" aria-label="My Enrolled Courses">
+        <div class="view-header-bar">
+          <div>
+            <h1>My Enrolled Courses</h1>
+            <p>One-click direct navigation into course materials, discussion boards, and assignment dropboxes without multiple category clicks.</p>
+          </div>
+          <div class="view-tools">
+            <div class="search-mini-wrap">
+              <input type="text" id="course-filter-search" placeholder="Filter enrolled courses..." aria-label="Filter enrolled courses">
+            </div>
+            <div class="view-switch-group" role="group" aria-label="Layout view">
+              <button class="icon-toggle-btn active" id="btn-grid-layout" title="Grid View" aria-label="Grid View">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              </button>
+              <button class="icon-toggle-btn" id="btn-list-layout" title="List View" aria-label="List View">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter bar -->
+        <div class="courses-filter-bar">
+          <div class="filter-chips">
+            <span class="filter-label">Department:</span>
+            <button class="chip active" data-course-filter="ALL">All Departments</button>
+            <button class="chip" data-course-filter="DSE">Software Engineering</button>
+            <button class="chip" data-course-filter="DCS">Computer Science</button>
+            <button class="chip" data-course-filter="DIS">Information Systems</button>
+            <button class="chip" data-course-filter="DDS">Data Science</button>
+          </div>
+          <div class="filter-chips">
+            <span class="filter-label">Semester:</span>
+            <button class="chip active" data-semester-filter="ALL">Current Semester (Y3S1)</button>
+            <button class="chip" data-semester-filter="PAST">Past Modules</button>
+          </div>
+        </div>
+
+        <!-- Full Courses Deck -->
+        <div class="full-courses-grid" id="full-courses-container">
+          <!-- Injected via JavaScript -->
+        </div>
+      </section>
+
+      <!-- ================= VIEW 3: DEDICATED NOTICE BOARD (Solves Problem #7) ================= -->
+      <section class="view-panel" id="view-announcements" aria-label="Faculty Notice Hub">
+        <div class="view-header-bar">
+          <div>
+            <h1>Faculty of Computing Notice Hub</h1>
+            <p>Dedicated repository for all academic circulars, timetable updates, examination guidelines, and seminar notices.</p>
+          </div>
+          <div class="view-tools">
+            <div class="search-mini-wrap">
+              <input type="text" id="notices-filter-search" placeholder="Search notices by keyword..." aria-label="Search notices">
+            </div>
+          </div>
+        </div>
+
+        <div class="notices-filter-pills">
+          <button class="pill active" data-notice-cat="ALL">All Notices (8)</button>
+          <button class="pill" data-notice-cat="URGENT">⚠️ Critical / High Priority</button>
+          <button class="pill" data-notice-cat="EXAM">📝 Examination Circulars</button>
+          <button class="pill" data-notice-cat="ACADEMIC">🎓 Academic & Lectures</button>
+          <button class="pill" data-notice-cat="CAREER">💼 Careers & Internships</button>
+        </div>
+
+        <div class="full-notices-feed" id="full-notices-container">
+          <!-- Injected via JS -->
+        </div>
+      </section>
+
+      <!-- ================= VIEW 4: DEADLINES & SUBMISSIONS (Solves Problem #1) ================= -->
+      <section class="view-panel" id="view-deadlines" aria-label="Deadlines and Submissions">
+        <div class="view-header-bar">
+          <div>
+            <h1>Assignment Deadlines & Submissions</h1>
+            <p>Track due dates, upload lab codes, view instructor feedback, and avoid missing academic deadlines.</p>
+          </div>
+        </div>
+
+        <div class="deadlines-container">
+          <div class="deadlines-status-cards">
+            <div class="metric-card urgent">
+              <span class="metric-val">2</span>
+              <span class="metric-title">Due in Next 7 Days</span>
+            </div>
+            <div class="metric-card ok">
+              <span class="metric-val">12</span>
+              <span class="metric-title">Successfully Submitted</span>
+            </div>
+            <div class="metric-card info">
+              <span class="metric-val">8</span>
+              <span class="metric-title">Graded & Feedback Ready</span>
+            </div>
+          </div>
+
+          <div class="deadlines-table-card">
+            <div class="table-header-row">
+              <h3>Upcoming & Pending Submissions</h3>
+              <div class="filter-pills-row">
+                <button class="filter-chip active" data-submission-status="ALL">All Submissions</button>
+                <button class="filter-chip" data-submission-status="PENDING">Pending Only</button>
+                <button class="filter-chip" data-submission-status="SUBMITTED">Completed</button>
+              </div>
+            </div>
+
+            <div class="submission-list" id="full-submission-list">
+              <!-- Injected via JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= VIEW 5: RESULTS & GPA BREAKDOWN ================= -->
+      <section class="view-panel" id="view-results" aria-label="Semester Results">
+        <div class="view-header-bar">
+          <div>
+            <h1>Examination Results & Performance Summary</h1>
+            <p>Official grading slips, GPA distribution, and course performance records.</p>
+          </div>
+          <button class="btn-solid-primary" id="btn-download-transcript">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download Official Result Sheet
+          </button>
+        </div>
+
+        <div class="gpa-overview-grid">
+          <div class="gpa-summary-card">
+            <div class="gpa-ring-graphic">
+              <div class="gpa-circle">
+                <span class="gpa-score">3.72</span>
+                <span class="gpa-scale">out of 4.00</span>
+              </div>
+            </div>
+            <div class="gpa-stats-details">
+              <h3>First Class Honours Standing</h3>
+              <p>Bachelor of Science Honours in Software Engineering</p>
+              <div class="credits-stat">
+                <span>Earned Credits: <strong>68 / 120</strong></span>
+                <span>Standing: <strong>Rank #4 / 120</strong></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="semester-results-card">
+            <h3>Year 2 Semester 2 (Final Grades)</h3>
+            <div class="results-table-wrap">
+              <table class="results-table">
+                <thead>
+                  <tr>
+                    <th>Module Code</th>
+                    <th>Module Name</th>
+                    <th>Credits</th>
+                    <th>Grade</th>
+                    <th>Grade Point</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>SE2012</strong></td>
+                    <td>Object-Oriented Design & Patterns</td>
+                    <td>3.0</td>
+                    <td><span class="badge-grade grade-a">A+</span></td>
+                    <td>4.0</td>
+                    <td>Passed</td>
+                  </tr>
+                  <tr>
+                    <td><strong>CS2043</strong></td>
+                    <td>Database Management Systems</td>
+                    <td>3.0</td>
+                    <td><span class="badge-grade grade-a">A</span></td>
+                    <td>4.0</td>
+                    <td>Passed</td>
+                  </tr>
+                  <tr>
+                    <td><strong>SE2032</strong></td>
+                    <td>Software Architecture & Engineering</td>
+                    <td>3.0</td>
+                    <td><span class="badge-grade grade-a">A-</span></td>
+                    <td>3.7</td>
+                    <td>Passed</td>
+                  </tr>
+                  <tr>
+                    <td><strong>CS2062</strong></td>
+                    <td>Data Structures & Algorithms</td>
+                    <td>3.0</td>
+                    <td><span class="badge-grade grade-b">B+</span></td>
+                    <td>3.3</td>
+                    <td>Passed</td>
+                  </tr>
+                  <tr>
+                    <td><strong>DIS2011</strong></td>
+                    <td>Human-Computer Interaction (HCI)</td>
+                    <td>2.0</td>
+                    <td><span class="badge-grade grade-a">A+</span></td>
+                    <td>4.0</td>
+                    <td>Passed</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= VIEW 6: COURSE CATALOG / DEPARTMENTS (Solves Problem #2) ================= -->
+      <section class="view-panel" id="view-departments" aria-label="Course Department Catalog">
+        <div class="view-header-bar">
+          <div>
+            <h1>Faculty Academic Departments & Degree Programs</h1>
+            <p>Browse courses cleanly without having to drill through nested, deeply confusing folders.</p>
+          </div>
+        </div>
+
+        <div class="dept-catalog-grid">
+          <div class="dept-card" data-catalog-dept="DSE">
+            <div class="dept-badge dse">DSE</div>
+            <h2>Department of Software Engineering</h2>
+            <p>Covers full-cycle software construction, enterprise system architecture, mobile computing, and quality assurance.</p>
+            <div class="dept-stats">
+              <span>24 Modules</span>
+              <span>•</span>
+              <span>4 Academic Years</span>
+            </div>
+            <button class="btn-card-action" data-explore-dept="DSE">Explore DSE Modules &rarr;</button>
+          </div>
+
+          <div class="dept-card" data-catalog-dept="DCS">
+            <div class="dept-badge dcs">DCS</div>
+            <h2>Department of Computer Science</h2>
+            <p>Theoretical foundations, algorithms, computer networks, distributed systems, and computer vision.</p>
+            <div class="dept-stats">
+              <span>28 Modules</span>
+              <span>•</span>
+              <span>4 Academic Years</span>
+            </div>
+            <button class="btn-card-action" data-explore-dept="DCS">Explore DCS Modules &rarr;</button>
+          </div>
+
+          <div class="dept-card" data-catalog-dept="DIS">
+            <div class="dept-badge dis">DIS</div>
+            <h2>Department of Information Systems</h2>
+            <p>Business analytics, IT governance, enterprise resource planning, UX/UI engineering, and digital transformation.</p>
+            <div class="dept-stats">
+              <span>20 Modules</span>
+              <span>•</span>
+              <span>4 Academic Years</span>
+            </div>
+            <button class="btn-card-action" data-explore-dept="DIS">Explore DIS Modules &rarr;</button>
+          </div>
+
+          <div class="dept-card" data-catalog-dept="DDS">
+            <div class="dept-badge dds">DDS</div>
+            <h2>Department of Data Science</h2>
+            <p>Machine learning, statistical inference, deep learning architectures, big data engineering, and NLP.</p>
+            <div class="dept-stats">
+              <span>18 Modules</span>
+              <span>•</span>
+              <span>4 Academic Years</span>
+            </div>
+            <button class="btn-card-action" data-explore-dept="DDS">Explore DDS Modules &rarr;</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= VIEW 7: USABILITY PROBLEM AUDIT & SOLUTION MATRIX (Assignment Special) ================= -->
+      <section class="view-panel" id="view-usability" aria-label="Usability Problems Evaluation Matrix">
+        <div class="view-header-bar">
+          <div>
+            <div class="tag-pill-highlight">Assignment Evaluation Matrix</div>
+            <h1>8 Usability Flaws in lms.foc.sjp.ac.lk & Their Redesign Solutions</h1>
+            <p>Direct mapping between identified usability defects from the Faculty of Computing LMS, HCI principles violated, and the corresponding UI/UX architectural solutions implemented in this redesign.</p>
+          </div>
+        </div>
+
+        <div class="usability-matrix-grid" id="usability-matrix-container">
+          <!-- Populated with rich comparison cards via JS -->
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Mobile Bottom Sticky Navigation (Solves Problem #6) -->
+  <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+    <button class="mobile-nav-item active" data-view="dashboard" aria-label="Dashboard">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+      <span>Home</span>
+    </button>
+    <button class="mobile-nav-item" data-view="courses" aria-label="My Courses">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      <span>Courses</span>
+    </button>
+    <button class="mobile-nav-item" data-view="announcements" aria-label="Notices">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+      <span>Notices</span>
+    </button>
+    <button class="mobile-nav-item" data-view="deadlines" aria-label="Tasks">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <span>Tasks</span>
+    </button>
+    <button class="mobile-nav-item" id="mobile-help-btn" aria-label="Help">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/></svg>
+      <span>Help</span>
+    </button>
+  </nav>
+
+  <!-- ================= MODALS & DRAWERS ================= -->
+
+  <!-- 1. Interactive Course Drawer (When student clicks a course) -->
+  <div class="drawer-overlay" id="course-drawer-overlay" style="display: none;" aria-hidden="true">
+    <div class="course-drawer" id="course-drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-course-title">
+      <div class="drawer-header">
+        <div class="drawer-header-meta">
+          <span class="badge-dept" id="drawer-course-dept">DSE</span>
+          <span class="badge-code" id="drawer-course-code">SE3042</span>
+        </div>
+        <button class="close-drawer-btn" id="close-course-drawer-btn" aria-label="Close course drawer">&times;</button>
+      </div>
+
+      <div class="drawer-body">
+        <h2 id="drawer-course-title">Software Architecture & Cloud Engineering</h2>
+        <div class="drawer-instructor">
+          <div class="inst-avatar">CW</div>
+          <div>
+            <strong id="drawer-instructor-name">Dr. Chinthaka Wickramasinghe</strong>
+            <p>Department of Software Engineering • 3.0 Credits</p>
+          </div>
+        </div>
+
+        <div class="drawer-tabs">
+          <button class="drawer-tab-btn active" data-drawer-tab="materials">Lecture Materials</button>
+          <button class="drawer-tab-btn" data-drawer-tab="assignments">Assignments & Labs</button>
+          <button class="drawer-tab-btn" data-drawer-tab="announcements">Course Notices</button>
+          <button class="drawer-tab-btn" data-drawer-tab="syllabus">Syllabus</button>
+        </div>
+
+        <div class="drawer-content-pane active" id="drawer-pane-materials">
+          <div class="module-week-block">
+            <h4>Week 9: Microservices & Event-Driven Architecture</h4>
+            <div class="resource-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <div class="res-info">
+                <strong>Lecture Slides: Microservices Communication & gRPC</strong>
+                <small>PDF • 4.8 MB • Uploaded 2 days ago</small>
+              </div>
+              <button class="btn-dl-res" title="Download Slide PDF">Download</button>
+            </div>
+            <div class="resource-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+              <div class="res-info">
+                <strong>Recorded Lecture Session (Zoom Cloud Archive)</strong>
+                <small>MP4 Video • 1h 45m • 1080p</small>
+              </div>
+              <button class="btn-dl-res" title="Watch Recording">Watch</button>
+            </div>
+          </div>
+
+          <div class="module-week-block">
+            <h4>Week 8: RESTful API Design & OpenAPI Specs</h4>
+            <div class="resource-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <div class="res-info">
+                <strong>Lecture Handout: Enterprise Integration Patterns</strong>
+                <small>PDF • 2.1 MB</small>
+              </div>
+              <button class="btn-dl-res">Download</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="drawer-content-pane" id="drawer-pane-assignments" style="display: none;">
+          <div class="assignment-drawer-card">
+            <div class="assign-meta-row">
+              <span class="badge-due">Due: Sunday, 11:59 PM</span>
+              <span class="badge-status-pending">Pending Submission</span>
+            </div>
+            <h3>Assignment 02: Kubernetes Cluster Deployment with Helm</h3>
+            <p>Deploy a containerized three-tier node app into a local Minikube cluster and configure ingress controllers.</p>
+            <div class="action-buttons-row">
+              <button class="btn-solid-primary" id="btn-open-submit-modal">Upload Submission File</button>
+              <button class="btn-outline">Download Problem Specification</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="drawer-content-pane" id="drawer-pane-announcements" style="display: none;">
+          <div class="notice-drawer-item">
+            <strong>Lab Rescheduling Notice</strong>
+            <p>The practical session for Friday has been moved to Computer Lab 03 from 2:00 PM to 4:00 PM.</p>
+            <small>Posted 3 days ago by Course Demonstrator</small>
+          </div>
+        </div>
+
+        <div class="drawer-content-pane" id="drawer-pane-syllabus" style="display: none;">
+          <p>This module provides students with the architectural patterns, container orchestration systems, and cloud-native practices necessary for modern enterprise applications.</p>
+          <ul class="bullet-list">
+            <li>Monoliths vs Distributed Microservices</li>
+            <li>API Gateways, Service Meshes, and gRPC</li>
+            <li>Docker containerization & Kubernetes clusters</li>
+            <li>Cloud Security, CI/CD pipelines, and Observability</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Interactive Help & Support Modal (Solves Problem #8) -->
+  <div class="modal-overlay" id="help-modal-overlay" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="help-modal-title">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-icon-badge">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div>
+            <h2 id="help-modal-title">Student Help & LMS Support Center</h2>
+            <p class="modal-sub">Faculty of Computing CITS & Academic Assistance</p>
+          </div>
+        </div>
+        <button class="modal-close-btn" id="close-help-modal-btn" aria-label="Close modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="support-channels-grid">
+          <div class="support-channel-card">
+            <div class="channel-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <strong>Email Support</strong>
+            <p>For password resets and enrollment key requests:</p>
+            <a href="mailto:lms.support@foc.sjp.ac.lk" class="channel-link">lms.support@foc.sjp.ac.lk</a>
+          </div>
+
+          <div class="support-channel-card">
+            <div class="channel-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <strong>Direct Phone Hotline</strong>
+            <p>Faculty CITS Centre (Ext. 8412):</p>
+            <span class="channel-link">+94 11 280 2022</span>
+          </div>
+
+          <div class="support-channel-card">
+            <div class="channel-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <strong>Physical Helpdesk</strong>
+            <p>Visit in person:</p>
+            <span class="channel-link">Level 2, FOC Complex, Gangodawila</span>
+          </div>
+        </div>
+
+        <h3 class="faq-section-title">Frequently Asked Questions (Troubleshooting)</h3>
+        <div class="faq-accordion">
+          <details class="faq-item">
+            <summary>How do I enroll in elective modules for this semester?</summary>
+            <div class="faq-answer">
+              Navigate to the <strong>Course Catalog</strong> tab, locate your degree program and academic year, click the elective module, and enter the self-enrollment key provided during the dean's orientation session.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>My assignment submission failed or timed out. What should I do?</summary>
+            <div class="faq-answer">
+              Make sure your file is below the 25 MB limit and formatted as a `.zip` or `.pdf`. If an error persists, take a timestamped screenshot and email it directly to your module coordinator before the 11:59 PM deadline.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>How do I reset my institutional Google/SJP student password?</summary>
+            <div class="faq-answer">
+              Visit the USJ central identity portal at <code>cit.sjp.ac.lk/pwreset</code> using your student registration number and alternate mobile verification code.
+            </div>
+          </details>
+        </div>
+
+        <div class="modal-form-box">
+          <h3>Submit an Instant Help Ticket</h3>
+          <form id="help-ticket-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="ticket-issue-type">Issue Category</label>
+                <select id="ticket-issue-type" required>
+                  <option value="access">Course Enrollment / Access Error</option>
+                  <option value="submission">Assignment Submission Issue</option>
+                  <option value="exam">Exam Timetable & Results Query</option>
+                  <option value="account">Login & Password Problem</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="ticket-course-code">Course Code (Optional)</label>
+                <input type="text" id="ticket-course-code" placeholder="e.g. SE3042">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="ticket-desc">Detailed Description</label>
+              <textarea id="ticket-desc" rows="3" placeholder="Describe what error message you see..." required></textarea>
+            </div>
+            <button type="submit" class="btn-solid-primary">Submit Support Ticket</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Assignment Submission Dropzone Modal -->
+  <div class="modal-overlay" id="submission-modal-overlay" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="sub-modal-title">
+      <div class="modal-header">
+        <div>
+          <h2 id="sub-modal-title">Submit Assignment</h2>
+          <p class="modal-sub" id="sub-modal-course-name">SE3042: Software Architecture & Cloud Engineering</p>
+        </div>
+        <button class="modal-close-btn" id="close-submission-modal-btn" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="file-dropzone" id="file-dropzone" tabindex="0" role="button" aria-label="Drop files here or click to browse">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <strong>Drag and drop your assignment file here</strong>
+          <span>Supported formats: ZIP, PDF, TAR.GZ (Max 25 MB)</span>
+          <button class="btn-outline drop-browse-btn" type="button">Browse Local Files</button>
+          <input type="file" id="submission-file-input" style="display: none;">
+        </div>
+
+        <div class="selected-file-preview" id="selected-file-preview" style="display: none;">
+          <div class="file-meta">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <div>
+              <strong id="preview-file-name">SE3042_Assignment2_SC20221042.zip</strong>
+              <small id="preview-file-size">4.2 MB • Ready to submit</small>
+            </div>
+          </div>
+          <button class="btn-remove-file" id="remove-file-btn">&times;</button>
+        </div>
+
+        <div class="academic-integrity-check">
+          <label>
+            <input type="checkbox" id="integrity-checkbox" required>
+            <span>I confirm that this submission is my own individual work and adheres to the University of Sri Jayewardenepura Academic Integrity & Plagiarism Policy.</span>
+          </label>
+        </div>
+
+        <div class="modal-actions-row">
+          <button class="btn-outline" id="cancel-submission-btn">Cancel</button>
+          <button class="btn-solid-primary" id="confirm-submission-btn" disabled>Confirm & Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container for Micro-Interactions -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <!-- Script logic -->
+  <script src="app.js"></script>
+</body>
+</html>
