@@ -568,10 +568,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Mobile Menu Toggle
     const mobileMenuBtn = document.getElementById('mobile-menu-toggle');
-    const sidebarDrawer = document.getElementById('sidebar-drawer');
-    if (mobileMenuBtn && sidebarDrawer) {
+    const appSidebar = document.getElementById('app-sidebar');
+    if (mobileMenuBtn && appSidebar) {
       mobileMenuBtn.addEventListener('click', () => {
-        const isOpen = sidebarDrawer.classList.toggle('open');
+        const isOpen = appSidebar.classList.toggle('open');
         mobileMenuBtn.setAttribute('aria-expanded', isOpen);
       });
     }
@@ -1101,6 +1101,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.view-panel').forEach(panel => {
       panel.classList.toggle('active', panel.id === `view-${viewName}`);
     });
+
+    // Close mobile drawer if open
+    const sidebar = document.getElementById('app-sidebar');
+    if (sidebar) sidebar.classList.remove('open');
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
