@@ -1038,6 +1038,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const viewAllDeadlinesBtn = document.getElementById('view-all-deadlines-btn');
     if (viewAllDeadlinesBtn) viewAllDeadlinesBtn.addEventListener('click', () => switchView('deadlines'));
+
+    // Stat pills quick navigation on Dashboard hero card
+    document.querySelectorAll('.stat-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        if (pill.classList.contains('highlight-deadline')) {
+          switchView('deadlines');
+        } else if (pill.classList.contains('highlight-alert')) {
+          switchView('announcements');
+        } else if (pill.querySelector('#stat-enrolled-count')) {
+          switchView('courses');
+        } else {
+          switchView('results');
+        }
+      });
+    });
+
+    // Quick Navigation Hub Cards navigation
+    document.querySelectorAll('[data-nav-dest]').forEach(card => {
+      card.addEventListener('click', () => {
+        const dest = card.getAttribute('data-nav-dest');
+        if (dest) switchView(dest);
+      });
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const dest = card.getAttribute('data-nav-dest');
+          if (dest) switchView(dest);
+        }
+      });
+    });
+
+    const hubSupportCard = document.getElementById('hub-card-support');
+    if (hubSupportCard) {
+      hubSupportCard.addEventListener('click', openHelp);
+      hubSupportCard.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openHelp();
+        }
+      });
+    }
   }
 
   // ================= Helper Functions =================

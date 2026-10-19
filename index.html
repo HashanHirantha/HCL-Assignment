@@ -14,9 +14,6 @@
   <!-- Accessibility Skip Link -->
   <a href="#main-content" class="skip-to-content">Skip to main content</a>
 
-  <!-- Usability Highlights Banner (Clickable to inspect how the 8 problems were solved) -->
-  
-
   <!-- Top Navigation Bar -->
   <header class="app-header" role="banner">
     <div class="header-container">
@@ -296,125 +293,102 @@
           </div>
         </div>
 
-        <!-- High-Priority Critical Alert (Solves Problem #7: Separates urgent announcements from clutter) -->
-        <div class="critical-alert-card" role="region" aria-label="Urgent Academic Notice">
-          <div class="alert-icon-wrap" aria-hidden="true">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          </div>
-          <div class="alert-content">
-            <div class="alert-tags">
-              <span class="tag-urgent">CRITICAL NOTICE</span>
-              <span class="tag-date">Issued: Yesterday at 4:30 PM by Dean's Office</span>
-            </div>
-            <h3>End-of-Semester 1 Examination Timetable & Admission Card Download</h3>
-            <p>Students eligible for Semester 1 examinations are advised to download the stamped admission form and verify hall allocation numbers before Friday.</p>
-          </div>
-          <div class="alert-actions">
-            <button class="btn-solid-primary" id="btn-download-admission">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Download PDF (1.4 MB)
-            </button>
-            <button class="btn-outline" id="btn-view-all-notices-alert">View Notice Board</button>
-          </div>
-        </div>
-
-        <!-- 2-Column Dashboard Grid -->
-        <div class="dashboard-grid">
-          <!-- Left Main Column: Active Courses & Materials -->
-          <div class="grid-primary-col">
-            <!-- Section: In-Progress Enrolled Courses (Solves Problem #1 & #2: Direct 1-click access) -->
-            <div class="section-card">
-              <div class="section-header">
-                <div class="section-title-wrap">
-                  <span class="section-icon-dot"></span>
-                  <h2>My Enrolled Courses</h2>
-                  <span class="header-count-tag" id="course-count-display">6 Active Courses</span>
-                </div>
-                <div class="header-tools">
-                  <div class="filter-pills-row" role="group" aria-label="Course Department Filters">
-                    <button class="filter-chip active" data-filter="ALL">All</button>
-                    <button class="filter-chip" data-filter="DSE">Software Eng</button>
-                    <button class="filter-chip" data-filter="DCS">Computer Sci</button>
-                    <button class="filter-chip" data-filter="DIS">Info Systems</button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Enrolled Courses Grid (Clean Card Design, No Lorem Ipsum, Solves Problem #4) -->
-              <div class="courses-card-grid" id="dashboard-courses-grid">
-                <!-- Injected via JavaScript -->
-              </div>
-            </div>
-
-            <!-- Section: Recent Course Materials & Handouts -->
-            <div class="section-card">
-              <div class="section-header">
-                <div class="section-title-wrap">
-                  <h2>Recently Uploaded Lecture Materials</h2>
-                  <p class="section-sub">Latest slides, tutorial sheets, and laboratory task guides</p>
-                </div>
-              </div>
-              <div class="materials-list" id="dashboard-materials-list">
-                <!-- Injected via JavaScript -->
-              </div>
-            </div>
+        <!-- Quick Navigation Hub (Solves Usability Problem #1: Minimal, Clutter-Free Dashboard Launchpad) -->
+        <div class="quick-nav-hub-section">
+          <div class="hub-section-header">
+            <h2>Academic Workspace Portals</h2>
+            <p>Access separated sections for your modules, circulars, assignment submissions, and performance.</p>
           </div>
 
-          <!-- Right Secondary Column: Tasks, Submissions & Mini Notice Board -->
-          <div class="grid-secondary-col">
-            <!-- Section: Pending Assignments & Deadlines (Solves Problem #1: Clean separation) -->
-            <div class="section-card deadline-card">
-              <div class="section-header">
-                <div class="section-title-wrap">
-                  <h2>Submissions & Deadlines</h2>
+          <div class="hub-cards-grid">
+            <!-- Portal Card 1: My Courses -->
+            <div class="hub-card" data-nav-dest="courses" tabindex="0" role="button" aria-label="Go to My Enrolled Courses">
+              <div class="hub-card-top">
+                <div class="hub-icon-wrap courses-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
                 </div>
-                <button class="btn-subtle-link" id="view-all-deadlines-btn">View All (4) &rarr;</button>
+                <span class="hub-badge blue">6 Active Modules</span>
               </div>
-
-              <div class="task-feed" id="dashboard-deadline-feed">
-                <!-- Injected via JavaScript -->
+              <h3>My Enrolled Courses</h3>
+              <p>Direct 1-click access to weekly lecture slides, lab recordings, tutorial sheets, and module syllabi.</p>
+              <div class="hub-card-footer">
+                <span class="hub-link-text">Enter Courses Portal &rarr;</span>
               </div>
             </div>
 
-            <!-- Section: Faculty Announcements Feed (Solves Problem #7) -->
-            <div class="section-card">
-              <div class="section-header">
-                <div class="section-title-wrap">
-                  <h2>Faculty Notices</h2>
+            <!-- Portal Card 2: Notice Board -->
+            <div class="hub-card" data-nav-dest="announcements" tabindex="0" role="button" aria-label="Go to Notice Board">
+              <div class="hub-card-top">
+                <div class="hub-icon-wrap notices-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
                 </div>
-                <button class="btn-subtle-link" id="view-all-notices-btn">Notice Hub &rarr;</button>
+                <span class="hub-badge urgent">3 Urgent Notices</span>
               </div>
-              <div class="mini-notices-feed" id="dashboard-mini-notices">
-                <!-- Injected via JS -->
+              <h3>Faculty Notice Board</h3>
+              <p>Official circulars, Semester 1 exam timetable, repeat candidate forms, and seminar notices.</p>
+              <div class="hub-card-footer">
+                <span class="hub-link-text">View Notice Board &rarr;</span>
               </div>
             </div>
 
-            <!-- Quick Contacts Card (Solves Problem #8) -->
-            <div class="section-card quick-help-card">
-              <div class="quick-help-header">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                <h3>Course Coordinators & Mentors</h3>
-              </div>
-              <p>Quick access to your academic year advisors and LMS administration team.</p>
-              <div class="mentor-contact-item">
-                <div class="mentor-avatar">Dr</div>
-                <div class="mentor-info">
-                  <strong>Dr. C. Wickramasinghe</strong>
-                  <span>Year 3 Academic Coordinator</span>
-                  <a href="mailto:coordinator.y3@foc.sjp.ac.lk" class="contact-link">coordinator.y3@foc.sjp.ac.lk</a>
+            <!-- Portal Card 3: Deadlines & Submissions -->
+            <div class="hub-card" data-nav-dest="deadlines" tabindex="0" role="button" aria-label="Go to Deadlines and Submissions">
+              <div class="hub-card-top">
+                <div class="hub-icon-wrap tasks-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                 </div>
+                <span class="hub-badge warning">2 Due This Week</span>
               </div>
-              <div class="mentor-contact-item">
-                <div class="mentor-avatar lms-av">IT</div>
-                <div class="mentor-info">
-                  <strong>FOC LMS Technical Desk</strong>
-                  <span>Server & Login Support</span>
-                  <a href="mailto:lmsadmin@foc.sjp.ac.lk" class="contact-link">lmsadmin@foc.sjp.ac.lk</a>
+              <h3>Assignments & Deadlines</h3>
+              <p>Track submission deadlines, upload assignment archives (.zip/.pdf), and view demonstrator grading.</p>
+              <div class="hub-card-footer">
+                <span class="hub-link-text">Open Assignment Tracker &rarr;</span>
+              </div>
+            </div>
+
+            <!-- Portal Card 4: Results & GPA -->
+            <div class="hub-card" data-nav-dest="results" tabindex="0" role="button" aria-label="Go to Results and GPA">
+              <div class="hub-card-top">
+                <div class="hub-icon-wrap results-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
                 </div>
+                <span class="hub-badge success">GPA 3.72 • 1st Class</span>
               </div>
-              <button class="btn-full-width-secondary" id="btn-open-help-center">
-                Open Help & Support Center
-              </button>
+              <h3>Semester Results & GPA</h3>
+              <p>View verified module grade points, GPA progression charts, and download stamped transcripts.</p>
+              <div class="hub-card-footer">
+                <span class="hub-link-text">View Results & Transcript &rarr;</span>
+              </div>
+            </div>
+
+            <!-- Portal Card 5: Course Catalog -->
+            <div class="hub-card" data-nav-dest="departments" tabindex="0" role="button" aria-label="Go to Course Catalog">
+              <div class="hub-card-top">
+                <div class="hub-icon-wrap catalog-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"/><path d="M9 7h1"/><path d="M9 11h1"/><path d="M9 15h1"/><path d="M14 7h1"/><path d="M14 11h1"/><path d="M14 15h1"/></svg>
+                </div>
+                <span class="hub-badge neutral">4 Departments</span>
+              </div>
+              <h3>Course Catalog & Syllabi</h3>
+              <p>Explore academic modules across Software Engineering, Computer Science, Information Systems & Data Science.</p>
+              <div class="hub-card-footer">
+                <span class="hub-link-text">Explore Departments &rarr;</span>
+              </div>
+            </div>
+
+            <!-- Portal Card 6: LMS Support Desk -->
+            <div class="hub-card" id="hub-card-support" tabindex="0" role="button" aria-label="Open LMS Support Desk">
+              <div class="hub-card-top">
+                <div class="hub-icon-wrap support-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                </div>
+                <span class="hub-badge gold">Live CITS Desk</span>
+              </div>
+              <h3>Student Help & Documentation</h3>
+              <p>Password reset instructions, Moodle troubleshooting guides, FAQs, and coordinator email hotlines.</p>
+              <div class="hub-card-footer">
+                <span class="hub-link-text">Get Help & Support &rarr;</span>
+              </div>
             </div>
           </div>
         </div>

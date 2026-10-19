@@ -2985,3 +2985,134 @@ body[data-theme="dark"] .gpa-score { color: #fff; }
     grid-template-columns: 1fr;
   }
 }
+
+/* Full Width Grid on Clean Minimal Dashboard */
+.full-width-grid {
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important;
+  gap: 20px;
+}
+.dashboard-courses-section {
+  padding: 24px;
+}
+.stat-pill {
+  cursor: pointer;
+}
+
+/* ================= Quick Navigation Hub ================= */
+.quick-nav-hub-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+}
+.hub-section-header {
+  margin-bottom: 20px;
+}
+.hub-section-header h2 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+.hub-section-header p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.hub-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+.hub-card {
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hub-card:hover {
+  background: var(--bg-card);
+  transform: translateY(-3px);
+  border-color: var(--brand-blue);
+  box-shadow: var(--shadow-md);
+}
+.hub-card:hover .hub-link-text {
+  transform: translateX(3px);
+}
+.hub-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.hub-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.courses-icon { background: #dbeafe; color: #1d4ed8; }
+.notices-icon { background: #fee2e2; color: #dc2626; }
+.tasks-icon { background: #fef3c7; color: #d97706; }
+.results-icon { background: #dcfce7; color: #16a34a; }
+.catalog-icon { background: #ede9fe; color: #7c3aed; }
+.support-icon { background: #ffedd5; color: #ea580c; }
+
+body[data-theme="dark"] .courses-icon { background: #1e3a8a40; color: #60a5fa; }
+body[data-theme="dark"] .notices-icon { background: #7f1d1d40; color: #f87171; }
+body[data-theme="dark"] .tasks-icon { background: #78350f40; color: #fbbf24; }
+body[data-theme="dark"] .results-icon { background: #064e3b40; color: #4ade80; }
+body[data-theme="dark"] .catalog-icon { background: #4c1d9540; color: #c084fc; }
+body[data-theme="dark"] .support-icon { background: #7c2d1240; color: #fb923c; }
+
+.hub-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+}
+.hub-badge.blue { background: #dbeafe; color: #1d4ed8; }
+.hub-badge.urgent { background: #fee2e2; color: #dc2626; }
+.hub-badge.warning { background: #fef3c7; color: #d97706; }
+.hub-badge.success { background: #dcfce7; color: #16a34a; }
+.hub-badge.neutral { background: #e2e8f0; color: #475569; }
+.hub-badge.gold { background: #fef3c7; color: #b45309; }
+
+body[data-theme="dark"] .hub-badge.neutral { background: #1e293b; color: #94a3b8; }
+
+.hub-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 6px;
+}
+.hub-card p {
+  font-size: 0.825rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin-bottom: 16px;
+  flex: 1;
+}
+.hub-card-footer {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 10px;
+}
+.hub-link-text {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--brand-blue);
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.15s ease;
+}
+
