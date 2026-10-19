@@ -3020,3 +3020,91 @@ body[data-theme="dark"] .hub-badge.neutral { background: #1e293b; color: #94a3b8
   transition: transform 0.15s ease;
 }
 
+/* ================= Semester Categorized Groups in My Courses ================= */
+.semesters-courses-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.semester-group-block {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 22px 24px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+.semester-group-block:hover {
+  border-color: var(--border-focus);
+}
+.semester-group-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+  border-bottom: 1.5px solid var(--border-subtle);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.sem-header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.sem-badge-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--brand-blue-subtle);
+  color: var(--brand-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+}
+.sem-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.sem-title-row h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+}
+.sem-subtitle {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+.sem-pill-status {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+.sem-pill-status.current {
+  background: #dbeafe;
+  color: var(--dept-dse);
+  border: 1px solid #bfdbfe;
+}
+.sem-pill-status.completed {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+body[data-theme="dark"] .sem-pill-status.current {
+  background: #1e3a8a40;
+  color: #60a5fa;
+  border-color: #1e3a8a;
+}
+body[data-theme="dark"] .sem-pill-status.completed {
+  background: #064e3b40;
+  color: #4ade80;
+  border-color: #064e3b;
+}
+
+

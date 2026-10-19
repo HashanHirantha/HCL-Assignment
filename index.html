@@ -352,8 +352,16 @@
           </div>
         </div>
 
-        <!-- Filter bar -->
+        <!-- Semester & Department Categorization Filter Bar -->
         <div class="courses-filter-bar">
+          <div class="filter-chips">
+            <span class="filter-label">Semester:</span>
+            <button class="chip active" data-semester-filter="ALL">All Semesters (Categorized)</button>
+            <button class="chip" data-semester-filter="Y3S1">Year 3 Sem 1 (Current)</button>
+            <button class="chip" data-semester-filter="Y2S2">Year 2 Sem 2</button>
+            <button class="chip" data-semester-filter="Y2S1">Year 2 Sem 1</button>
+            <button class="chip" data-semester-filter="Y1">Year 1 Modules</button>
+          </div>
           <div class="filter-chips">
             <span class="filter-label">Department:</span>
             <button class="chip active" data-course-filter="ALL">All Departments</button>
@@ -362,16 +370,11 @@
             <button class="chip" data-course-filter="DIS">Information Systems</button>
             <button class="chip" data-course-filter="DDS">Data Science</button>
           </div>
-          <div class="filter-chips">
-            <span class="filter-label">Semester:</span>
-            <button class="chip active" data-semester-filter="ALL">Current Semester (Y3S1)</button>
-            <button class="chip" data-semester-filter="PAST">Past Modules</button>
-          </div>
         </div>
 
-        <!-- Full Courses Deck -->
-        <div class="full-courses-grid" id="full-courses-container">
-          <!-- Injected via JavaScript -->
+        <!-- Full Semesters & Courses Container -->
+        <div class="semesters-courses-wrapper" id="full-courses-container">
+          <!-- Injected via JavaScript grouped by semester -->
         </div>
       </section>
 
